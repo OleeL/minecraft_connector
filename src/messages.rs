@@ -1,4 +1,4 @@
-use std::io::{Error, prelude::*};
+use std::io::{prelude::*, Error};
 use std::net::TcpStream;
 
 use crate::address::Address;

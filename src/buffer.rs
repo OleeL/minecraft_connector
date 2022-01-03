@@ -1,7 +1,6 @@
 pub struct Buffer(pub Vec<u8>);
 
 impl Buffer {
-
     pub fn new() -> Self {
         Self(Vec::new())
     }
@@ -27,13 +26,14 @@ impl Buffer {
     }
 
     pub fn write_string(&mut self, message: &str, write_len: bool) {
-        if write_len {self.write_var_int(message.len());}
+        if write_len {
+            self.write_var_int(message.len());
+        }
 
         let bytes = message.as_bytes();
         self.0.extend(bytes);
     }
 }
-
 
 pub fn read_var_int(vec: &mut Vec<u8>) -> i32 {
     let mut res = 0i32;
@@ -41,7 +41,7 @@ pub fn read_var_int(vec: &mut Vec<u8>) -> i32 {
         let part = vec.remove(0);
         res |= (part as i32 & 0x7F) << (7 * i);
         if part & 0x80 == 0 {
-            return res
+            return res;
         }
     }
 
